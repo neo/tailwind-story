@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "test": "gulp build"
+  },
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^2.2.0",
+    "gulp": "^4.0.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-if": "^3.0.0",
+    "gulp-postcss": "^8.0.0",
+    "tailwindcss": "^1.4.6",
+    "through2": "^3.0.1"
+  }
+}
