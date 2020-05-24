@@ -1,7 +1,8 @@
-const { src, dest } = require("gulp");
+const { src, dest, watch } = require("gulp");
 const postcss = require("gulp-postcss");
 const through2 = require("through2");
 const gulpif = require("gulp-if");
+const browserSync = require("browser-sync").create();
 
 const htmlmin = require("gulp-htmlmin")({
   minifyCSS: true,
@@ -41,6 +42,19 @@ function compile(minify) {
     .pipe(gulpif(minify, htmlmin))
     .pipe(dest("docs"));
 }
+
+exports.dev = function () {
+  browserSync.init({
+    server: "./docs",
+    logLevel: "silent",
+  });
+
+  function sync() {
+    return compile(false).pipe(browserSync.stream());
+  }
+
+  watch(["index.html", "styles.css"], { ignoreInitial: false }, sync);
+};
 
 exports.build = function () {
   return compile(true);
